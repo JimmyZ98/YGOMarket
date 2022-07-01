@@ -1,0 +1,11 @@
+@use "./fonts" as *;
+
+* {
+  font-family: "Poppins";
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: inherit;
+  list-style-type: none;
+}

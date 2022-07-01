@@ -1,0 +1,95 @@
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/mixins" as *;
+
+.header {
+  height: 7rem;
+  background-color: $primary-color;
+  color: white;
+  display: flex;
+  align-items: center;
+
+  &__inner {
+    padding: 0 1rem;
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  &__nav-menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 500px;
+    position: absolute;
+    top: 5.5rem;
+    left: 100%;
+    transition: all 0.5 ease;
+
+    @include tablet {
+      position: static;
+      height: auto;
+      width: 6rem;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    &--active {
+      background: $primary-color;
+      left: 0;
+      transition: all 0.5s ease;
+      z-index: 1;
+    }
+  }
+
+  &__nav-link {
+    text-align: center;
+    padding: 1rem 0;
+    width: 100%;
+    display: table;
+
+    &:hover {
+      background-color: $secondary-color;
+      transition: all 100ms;
+      font-size: 1.1rem;
+
+      @include tablet {
+        background-color: $primary-color;
+        transition: all 100ms;
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  &__logo {
+    height: 4rem;
+  }
+
+  &__icon {
+    color: white;
+
+    &:hover {
+      cursor: pointer;
+      transition: all 100ms;
+      font-size: 1.2rem;
+    }
+  }
+
+  &__menu-icon {
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__cart-icon {
+    position: absolute;
+    right: 3rem;
+    @include tablet {
+      position: absolute;
+      right: 8rem;
+    }
+  }
+}
