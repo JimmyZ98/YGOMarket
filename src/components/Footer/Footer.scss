@@ -1,0 +1,27 @@
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/mixins" as *;
+
+.footer {
+  height: 4rem;
+  background-color: $primary-color;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0 1rem;
+  @include tablet {
+    padding: 0 2rem;
+  }
+
+  &__logo {
+    height: 3rem;
+    margin-left: 1rem;
+  }
+
+  &__text {
+    padding-bottom: 0.25rem;
+    font-size: 0.5rem;
+  }
+}
