@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./Header.scss";
 import logo from "../../assets/Logo/YGOMarket-logo.png";
 import { Link } from "react-router-dom";

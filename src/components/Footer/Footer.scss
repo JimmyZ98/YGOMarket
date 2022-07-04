@@ -4,12 +4,12 @@
 @use "../../styles/partials/mixins" as *;
 
 .footer {
-  height: 4rem;
+  height: 15rem;
   background-color: $primary-color;
   color: white;
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
+  align-items: flex-start;
   padding: 0 1rem;
   @include tablet {
     padding: 0 2rem;
@@ -18,10 +18,13 @@
   &__logo {
     height: 3rem;
     margin-left: 1rem;
+    margin-top: 0.75rem;
   }
 
   &__text {
-    padding-bottom: 0.25rem;
+    padding-top: 3rem;
     font-size: 0.5rem;
   }
+
+  overflow: hidden;
 }
