@@ -8,8 +8,8 @@ import SellPage from "./pages/SellPage/SellPage";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import axios from "axios";
 import SigninPage from "./pages/SigninPage/SigninPage";
-
-const API_URL = "http://localhost:8080";
+import { API_URL } from "./config/apiurl";
+// const API_URL = "http://localhost:8080";
 
 function App() {
   const [posts, setPosts] = useState([]);
