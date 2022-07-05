@@ -21,6 +21,9 @@ const regexEmail = new RegExp(
 );
 
 function CheckoutPage({ cartItems, handleRemove, showCart, handleCartClick }) {
+  let cartItemIds = cartItems.map((x) => x.id);
+  console.log(JSON.stringify(cartItemIds));
+
   const { register, control, handleSubmit } = useForm();
 
   const onSubmit = (e) => {
