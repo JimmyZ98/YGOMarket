@@ -24,7 +24,6 @@ const StyledDiv = styled.div`
 `;
 
 function SellPage({ cartItems, handleRemove, showCart, handleCartClick }) {
-  console.log(`${API_URL}/sell`);
   const [cardData, setCardData] = useState([]);
   const [cardCode, setCardCode] = useState([]);
   const [marketPrice, setMarketPrice] = useState("");

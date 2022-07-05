@@ -20,11 +20,18 @@ const regexEmail = new RegExp(
   "i"
 );
 
-function CheckoutPage({ cartItems, handleRemove, showCart, handleCartClick }) {
+function CheckoutPage({
+  cartItems,
+  handleRemove,
+  showCart,
+  handleCartClick,
+  handleEmptyCart,
+}) {
   let cartItemIds = cartItems.map((x) => x.id);
-  console.log(JSON.stringify(cartItemIds));
 
-  const { register, control, handleSubmit } = useForm();
+  console.log(cartItemIds);
+
+  const { control, handleSubmit } = useForm();
 
   const onSubmit = (e) => {
     if (
@@ -44,8 +51,12 @@ function CheckoutPage({ cartItems, handleRemove, showCart, handleCartClick }) {
       alert("Please enter a valid email address");
       return 0;
     } else {
-      axios.post(`${API_URL}/checkout`, cartItems).then((response) => {
-        console.log(response);
+      axios.post(`${API_URL}/checkout`, cartItemIds).then((response) => {
+        if (response) {
+          handleEmptyCart();
+          alert("Your order has been confirmed!");
+          window.location.assign(`/home`);
+        }
       });
     }
   };

@@ -38,6 +38,10 @@ function App() {
     setMenu(false);
   };
 
+  const handleEmptyCart = () => {
+    setCartItems([]);
+  };
+
   useEffect(() => {
     axios.get(API_URL).then((response) => {
       setPosts(response.data);
@@ -85,6 +89,7 @@ function App() {
               handleRemove={handleRemove}
               showCart={showCart}
               handleCartClick={handleCartClick}
+              handleEmptyCart={handleEmptyCart}
             />
           </Route>
           <Route path="/signin">
