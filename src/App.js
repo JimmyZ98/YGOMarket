@@ -8,7 +8,7 @@ import SellPage from "./pages/SellPage/SellPage";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import axios from "axios";
 import SigninPage from "./pages/SigninPage/SigninPage";
-import { API_URL } from "./config/apiurl";
+const API_URL = process.env.REACT_APP_API_URL;
 
 function App() {
   const [posts, setPosts] = useState([]);
