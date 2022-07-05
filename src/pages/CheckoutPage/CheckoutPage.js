@@ -9,8 +9,8 @@ import TextField from "@mui/material/TextField";
 import { useForm, Controller } from "react-hook-form";
 import { provinces } from "./Provinces";
 import Cart from "../../components/Cart/Cart";
+const API_URL = process.env.REACT_APP_API_URL;
 
-const API_URL = "http://localhost:8080";
 const regexPhone = new RegExp(
   /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
   "im"
