@@ -12,7 +12,6 @@ import styled from "styled-components";
 import Cart from "../../components/Cart/Cart";
 
 const YGO_API_URL = "https://db.ygoprodeck.com/api/v7/cardinfo.php";
-
 const API_URL = process.env.REACT_APP_API_URL;
 
 //image position
@@ -25,6 +24,7 @@ const StyledDiv = styled.div`
 `;
 
 function SellPage({ cartItems, handleRemove, showCart, handleCartClick }) {
+  console.log(`${API_URL}/sell`);
   const [cardData, setCardData] = useState([]);
   const [cardCode, setCardCode] = useState([]);
   const [marketPrice, setMarketPrice] = useState("");
@@ -64,6 +64,10 @@ function SellPage({ cartItems, handleRemove, showCart, handleCartClick }) {
     },
   ];
 
+  // `${API_URL}sell`, e, {
+  //   headers: { "Content-Type": "application/json" },
+  // }
+
   //form controls
   const { control, handleSubmit } = useForm();
 
@@ -73,16 +77,12 @@ function SellPage({ cartItems, handleRemove, showCart, handleCartClick }) {
     e.marketPrice = marketPrice;
     e.sellerId = 1;
     console.log(e);
-    axios
-      .post(`${API_URL}sell`, e, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then((response) => {
-        if (response) {
-          alert("Your card has been listed!");
-          window.location.assign(`/home`);
-        }
-      });
+    axios.post(`${API_URL}/sell`, e).then((response) => {
+      if (response) {
+        alert("Your card has been listed!");
+        window.location.assign(`/home`);
+      }
+    });
   };
 
   return (
