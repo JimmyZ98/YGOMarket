@@ -1,29 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./HomePage.scss";
 import PostItem from "../../components/PostItem/PostItem";
-import axios from "axios";
+import Cart from "../../components/Cart/Cart";
+import Filter from "../../components/Filter/Filter";
 
-function HomePage() {
-  const API_URL = "http://localhost:8080";
-
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    axios.get(`${API_URL}/`).then((response) => {
-      setPosts(response.data);
-    });
-  }, [`${API_URL}/`]);
-
-  if (posts.length === 0) {
-    return <h1>loading</h1>;
-  }
+function HomePage({
+  posts,
+  cartItems,
+  handleAdd,
+  handleRemove,
+  showCart,
+  handleCartClick,
+}) {
   return (
     <div className="home">
-      <ul className="home__posts-list">
-        {posts.map((post) => (
-          <PostItem key={post.id} post={post} />
-        ))}
-      </ul>
+      {/* <Filter /> */}
+      <div className="home__main">
+        <h1 className="home__title"> Shop Cards</h1>
+        <ul className="home__posts-list">
+          {posts.map((post) => (
+            <PostItem key={post.id} post={post} handleAdd={handleAdd} />
+          ))}
+        </ul>
+      </div>
+      <Cart
+        cartItems={cartItems}
+        handleRemove={handleRemove}
+        showCart={showCart}
+        handleCartClick={handleCartClick}
+      />
     </div>
   );
 }

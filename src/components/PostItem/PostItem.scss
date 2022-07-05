@@ -5,26 +5,44 @@
 
 .post {
   padding: 1rem;
-  width: 40%;
+  width: 100%;
   box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
   border-radius: 3px;
   margin-bottom: 1rem;
+  max-width: 25rem;
+  margin: 0 auto;
 
   &__container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include tablet {
+      flex-direction: row;
+      justify-content: space-between;
+    }
   }
 
   &__img {
     height: 12rem;
+    margin-bottom: 1rem;
+
+    @include tablet {
+      margin-bottom: 0;
+    }
   }
 
   &__information {
-    margin-left: 1rem;
-    height: 12rem;
+    height: 9rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 50%;
+    width: 100%;
+    text-align: center;
+    @include tablet {
+      text-align: left;
+      width: 60%;
+      height: 12rem;
+    }
   }
 
   &__name {
@@ -41,8 +59,12 @@
   }
 
   &__market-price {
-    margin-bottom: 1rem;
     font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+
+    @include tablet {
+      margin-bottom: 1rem;
+    }
   }
 
   &__set-rarity {
@@ -60,12 +82,15 @@
     background-color: $primary-color;
     color: white;
     width: 100%;
-    text-align: center;
 
     &:hover {
       box-shadow: 0 0 0.5em 0.05em $secondary-color;
       transform: scale(1.05);
       cursor: pointer;
     }
+  }
+
+  &__add-icon {
+    margin-left: 0.5rem;
   }
 }

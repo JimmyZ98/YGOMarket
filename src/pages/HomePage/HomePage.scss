@@ -1,5 +1,26 @@
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/mixins" as *;
+
 .home {
+  @include tablet {
+    display: flex;
+  }
+
+  &__title {
+    margin: 1rem 0;
+    text-align: center;
+
+    @include tablet {
+      margin: 1.5rem 0;
+    }
+  }
+
   &__posts-list {
-    margin-top: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  &__main {
   }
 }

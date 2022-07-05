@@ -1,7 +1,7 @@
 import React from "react";
 import "./PostItem.scss";
 
-function HomeCard({ post }) {
+function PostItem({ post, handleAdd }) {
   return (
     <li className="post">
       <div className="post__container">
@@ -19,9 +19,9 @@ function HomeCard({ post }) {
             <p className="post__market-price post__text">
               Market price: ${post.marketPrice}
             </p>
-            <div className="post__add">
-              Add to Cart <i className="fas fa-plus-square"></i>
-            </div>
+            <button className="post__add" onClick={() => handleAdd(post)}>
+              Add to Cart <i className="fas fa-plus-square post__add-icon"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -29,4 +29,4 @@ function HomeCard({ post }) {
   );
 }
 
-export default HomeCard;
+export default PostItem;
