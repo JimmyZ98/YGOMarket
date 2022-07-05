@@ -9,7 +9,6 @@ import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import axios from "axios";
 import SigninPage from "./pages/SigninPage/SigninPage";
 import { API_URL } from "./config/apiurl";
-// const API_URL = "http://localhost:8080";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -43,7 +42,7 @@ function App() {
     axios.get(`${API_URL}/`).then((response) => {
       setPosts(response.data);
     });
-  }, [`${API_URL}/`]);
+  }, []);
 
   if (posts.length === 0) {
     return <h1>loading</h1>;
