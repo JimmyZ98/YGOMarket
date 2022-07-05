@@ -10,7 +10,8 @@ import { createFilterOptions } from "@mui/material/Autocomplete";
 import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
 import Cart from "../../components/Cart/Cart";
-import { YGO_API_URL } from "../../config/externalapi";
+
+YGO_API_URL = "https://db.ygoprodeck.com/api/v7/cardinfo.php";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
