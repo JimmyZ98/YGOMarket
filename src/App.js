@@ -11,8 +11,6 @@ import SigninPage from "./pages/SigninPage/SigninPage";
 const API_URL = process.env.REACT_APP_API_URL;
 
 function App() {
-  console.log(API_URL);
-
   const [posts, setPosts] = useState([]);
   const [menu, setMenu] = useState(false);
   const [cartItems, setCartItems] = useState([]);
@@ -41,7 +39,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.log(API_URL);
     axios.get(API_URL).then((response) => {
       setPosts(response.data);
     });
