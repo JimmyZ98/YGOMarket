@@ -74,7 +74,7 @@ function SellPage({ cartItems, handleRemove, showCart, handleCartClick }) {
     e.sellerId = 1;
     console.log(e);
     axios
-      .post(`${API_URL}/sell`, e, {
+      .post(`${API_URL}sell`, e, {
         headers: { "Content-Type": "application/json" },
       })
       .then((response) => {
