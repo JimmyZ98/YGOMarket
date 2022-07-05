@@ -41,7 +41,8 @@ function App() {
   };
 
   useEffect(() => {
-    axios.get(`${API_URL}/`).then((response) => {
+    console.log(API_URL);
+    axios.get(API_URL).then((response) => {
       setPosts(response.data);
     });
   }, []);
