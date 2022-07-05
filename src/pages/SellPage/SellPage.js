@@ -10,8 +10,9 @@ import { createFilterOptions } from "@mui/material/Autocomplete";
 import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
 import Cart from "../../components/Cart/Cart";
-import { API_URL } from "../../config/apiurl";
 import { YGO_API_URL } from "../../config/externalapi";
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 //image position
 const aspectRatio = [1.4, 1];
