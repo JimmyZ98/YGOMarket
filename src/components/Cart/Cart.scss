@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     position: absolute;
     top: 7rem;
     left: 100%;
@@ -19,9 +19,10 @@
 
     @include tablet {
       width: 30%;
+      height: 90%;
     }
     &--active {
-      background: white;
+      background: $primary-pale;
       left: 0;
       transition: all 0.5s ease;
       z-index: 5000;

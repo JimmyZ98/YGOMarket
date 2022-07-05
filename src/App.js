@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import SellPage from "./pages/SellPage/SellPage";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import axios from "axios";
+import SigninPage from "./pages/SigninPage/SigninPage";
 
 const API_URL = "http://localhost:8080";
 
@@ -71,10 +72,29 @@ function App() {
             />
           </Route>
           <Route path="/sell">
-            <SellPage posts={posts} cartItems={cartItems} />
+            <SellPage
+              posts={posts}
+              cartItems={cartItems}
+              handleRemove={handleRemove}
+              showCart={showCart}
+              handleCartClick={handleCartClick}
+            />
           </Route>
           <Route path="/checkout">
-            <CheckoutPage posts={posts} cartItems={cartItems} />
+            <CheckoutPage
+              cartItems={cartItems}
+              handleRemove={handleRemove}
+              showCart={showCart}
+              handleCartClick={handleCartClick}
+            />
+          </Route>
+          <Route path="/signin">
+            <SigninPage
+              cartItems={cartItems}
+              handleRemove={handleRemove}
+              showCart={showCart}
+              handleCartClick={handleCartClick}
+            />
           </Route>
         </Switch>
         <Footer />

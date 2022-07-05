@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "../../styles/theme";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./SellPage.scss";
 import axios from "axios";
@@ -8,19 +9,11 @@ import TextField from "@mui/material/TextField";
 import { createFilterOptions } from "@mui/material/Autocomplete";
 import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
+import Cart from "../../components/Cart/Cart";
 
 //API Urls
 const YGO_API_URL = "https://db.ygoprodeck.com/api/v7/cardinfo.php";
 const API_URL = "http://localhost:8080";
-
-//Styling MUI components
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#f72585",
-    },
-  },
-});
 
 //image position
 const aspectRatio = [1.4, 1];
@@ -31,7 +24,7 @@ const StyledDiv = styled.div`
   margin-bottom: 2rem;
 `;
 
-function SellPage() {
+function SellPage({ cartItems, handleRemove, showCart, handleCartClick }) {
   const [cardData, setCardData] = useState([]);
   const [cardCode, setCardCode] = useState([]);
   const [marketPrice, setMarketPrice] = useState("");
@@ -72,7 +65,7 @@ function SellPage() {
   ];
 
   //form controls
-  const { register, control, handleSubmit } = useForm();
+  const { control, handleSubmit } = useForm();
 
   const onSubmit = (e) => {
     e.rarity = cardRarity;
@@ -81,7 +74,7 @@ function SellPage() {
     e.sellerId = 1;
     console.log(e);
     axios
-      .post(`${API_URL}/`, e, {
+      .post(`${API_URL}/sell`, e, {
         headers: { "Content-Type": "application/json" },
       })
       .then((response) => {
@@ -100,7 +93,7 @@ function SellPage() {
           <StyledDiv>
             <img
               src={displayImage}
-              alt="card image"
+              alt="card"
               className="sell__display-image"
             />
           </StyledDiv>
@@ -120,7 +113,6 @@ function SellPage() {
                   getOptionLabel={(cardData) => cardData.name}
                   sx={{ width: 1 }}
                   onChange={(e, data) => {
-                    console.log(data);
                     onChange(data.name);
                     setCardCode(data.card_sets);
                     setImage(data.card_images[0].image_url_small);
@@ -156,7 +148,6 @@ function SellPage() {
                   }
                   sx={{ width: 1 }}
                   onChange={(e, data) => {
-                    console.log(data);
                     onChange(data.set_code);
                     setCardRarity(data.set_rarity);
                     setMarketPrice(data.set_price);
@@ -186,7 +177,6 @@ function SellPage() {
               control={control}
               rules={{ required: true }}
               defaultValue=""
-              className="test"
             />
             <Controller
               render={({ field: { onChange } }) => (
@@ -225,6 +215,12 @@ function SellPage() {
             </button>
           </form>
         </div>
+        <Cart
+          cartItems={cartItems}
+          handleRemove={handleRemove}
+          showCart={showCart}
+          handleCartClick={handleCartClick}
+        />
       </div>
     </ThemeProvider>
   );

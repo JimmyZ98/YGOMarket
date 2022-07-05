@@ -1,0 +1,30 @@
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/mixins" as *;
+
+.checkout {
+  margin: 0 auto;
+  padding: 1rem;
+  padding-bottom: 10rem;
+  @include tablet {
+    max-width: 65rem;
+    padding: 2rem;
+    padding-bottom: 10rem;
+  }
+
+  &__form-button {
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    border: none;
+    background-color: $primary-color;
+    color: white;
+    width: 100%;
+
+    &:hover {
+      box-shadow: 0 0 0.5em 0.05em $secondary-color;
+      transform: scale(1.05);
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+export const provinces = [
+  "Ontario",
+  "Quebec",
+  "Alberta",
+  "British Columbia",
+  "Manitoba",
+  "New Brunswick",
+  "Newfoundland and Labrador",
+  "Northwest Territories",
+  "Nova Scotia",
+  "Nunavut",
+  "Prince Edward Island",
+  "Saskatchewan",
+  "Yukon",
+];
