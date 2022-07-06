@@ -5,7 +5,13 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 const API_URL = process.env.REACT_APP_API_URL;
 
-function SigninPage({ cartItems, handleRemove, showCart, handleCartClick }) {
+function SigninPage({
+  cartItems,
+  handleRemove,
+  showCart,
+  handleCartClick,
+  darkMode,
+}) {
   const handleSignIn = (e) => {
     e.preventDefault();
 
@@ -31,8 +37,12 @@ function SigninPage({ cartItems, handleRemove, showCart, handleCartClick }) {
   };
 
   return (
-    <div className="signin">
-      <div className="signin__container">
+    <div className={darkMode ? "signin darkmodeb" : "signin"}>
+      <div
+        className={
+          darkMode ? "signin__container darkmode" : "signin__container"
+        }
+      >
         <h1 className="signin__title">Sign In</h1>
         <form className="signin__form" onSubmit={handleSignIn}>
           <div className="signin__form-group">

@@ -49,6 +49,10 @@ function App() {
     setShowFilter((prevShowFilter) => !prevShowFilter);
   };
 
+  const handleDark = () => {
+    setDarkMode((prevDarkMode) => !prevDarkMode);
+  };
+
   useEffect(() => {
     axios.get(API_URL).then((response) => {
       setPosts(response.data);
@@ -69,6 +73,7 @@ function App() {
           handleClickMenu={handleClickMenu}
           handleCartClick={handleCartClick}
           darkMode={darkMode}
+          handleDark={handleDark}
         />
         <Switch>
           <Redirect from="/" to="/home" exact />
@@ -124,7 +129,7 @@ function App() {
             />
           </Route>
         </Switch>
-        <Footer />
+        <Footer darkMode={darkMode} />
       </BrowserRouter>
     </div>
   );

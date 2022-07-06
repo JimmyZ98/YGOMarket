@@ -20,11 +20,17 @@ const aspectRatio = [1.4, 1];
 const StyledDiv = styled.div`
   height: calc(20.5rem / ${aspectRatio[1]});
   width: calc(20rem / ${aspectRatio[0]});
-  border: thick double #f72585;
+  border: thick double #d4cbcb;
   margin-bottom: 2rem;
 `;
 
-function SellPage({ cartItems, handleRemove, showCart, handleCartClick }) {
+function SellPage({
+  cartItems,
+  handleRemove,
+  showCart,
+  handleCartClick,
+  darkMode,
+}) {
   const [cardData, setCardData] = useState([]);
   const [cardCode, setCardCode] = useState([]);
   const [marketPrice, setMarketPrice] = useState("");
@@ -49,7 +55,6 @@ function SellPage({ cartItems, handleRemove, showCart, handleCartClick }) {
           },
         })
         .then((res) => {
-          console.log(res);
           setPromptLogin(false);
         });
     }
@@ -93,7 +98,6 @@ function SellPage({ cartItems, handleRemove, showCart, handleCartClick }) {
     e.image = image;
     e.marketPrice = marketPrice;
     e.sellerId = 1;
-    console.log(e);
     axios.post(`${API_URL}/sell`, e).then((response) => {
       if (response) {
         alert("Your card has been listed!");
@@ -103,7 +107,9 @@ function SellPage({ cartItems, handleRemove, showCart, handleCartClick }) {
   };
 
   return promptLogin ? (
-    <div className="sell__login-notif">
+    <div
+      className={darkMode ? "sell__login-notif darkmodeb" : "sell__login-notif"}
+    >
       Please{" "}
       <Link to="/signin" className="sell__login-notif--text">
         login
@@ -112,7 +118,7 @@ function SellPage({ cartItems, handleRemove, showCart, handleCartClick }) {
     </div>
   ) : (
     <ThemeProvider theme={theme}>
-      <div className="sell">
+      <div className={darkMode ? "sell darkmodel" : "sell"}>
         <h1 className="sell__title">Sell Card</h1>
         <div className="sell__form-container">
           <StyledDiv>
@@ -235,7 +241,12 @@ function SellPage({ cartItems, handleRemove, showCart, handleCartClick }) {
             />
             <p>*Market price is {marketPrice}</p>
 
-            <button className="sell__form-button" type="submit">
+            <button
+              className={
+                darkMode ? "sell__form-button darkmodebtn" : "sell__form-button"
+              }
+              type="submit"
+            >
               Submit
             </button>
           </form>

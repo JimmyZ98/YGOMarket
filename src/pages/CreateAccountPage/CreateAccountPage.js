@@ -9,6 +9,7 @@ function CreateAccountPage({
   handleRemove,
   showCart,
   handleCartClick,
+  darkMode,
 }) {
   const handleRegister = (e) => {
     e.preventDefault();
@@ -31,8 +32,12 @@ function CreateAccountPage({
     }
   };
   return (
-    <div className="register">
-      <div className="register__container">
+    <div className={darkMode ? "register darkmodeb" : "register"}>
+      <div
+        className={
+          darkMode ? "register__container darkmode" : "register__container"
+        }
+      >
         <h1 className="register__title">Create an Account</h1>
         <form className="register__form" onSubmit={handleRegister}>
           <div className="register__form-group">

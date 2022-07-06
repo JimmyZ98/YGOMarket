@@ -13,10 +13,11 @@ function HomePage({
   handleCartClick,
   showFilter,
   handleFilterClick,
+  darkMode,
 }) {
   return (
-    <div className="home">
-      <Filter showFilter={showFilter} />
+    <div className={darkMode ? "home darkmodeb" : "home"}>
+      <Filter showFilter={showFilter} darkMode={darkMode} />
       <div className="home__main">
         <div className="home__filter-container">
           <button className="home__filter" onClick={handleFilterClick}>
@@ -26,7 +27,12 @@ function HomePage({
         <h1 className="home__title"> Shop Cards</h1>
         <ul className="home__posts-list">
           {posts.map((post) => (
-            <PostItem key={post.id} post={post} handleAdd={handleAdd} />
+            <PostItem
+              key={post.id}
+              post={post}
+              handleAdd={handleAdd}
+              darkMode={darkMode}
+            />
           ))}
         </ul>
       </div>

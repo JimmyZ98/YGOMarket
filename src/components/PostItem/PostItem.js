@@ -1,9 +1,9 @@
 import React from "react";
 import "./PostItem.scss";
 
-function PostItem({ post, handleAdd }) {
+function PostItem({ post, handleAdd, darkMode }) {
   return (
-    <li className="post">
+    <li className={darkMode ? "post darkmode" : "post"}>
       <div className="post__container">
         <img className="post__img" src={post.image} alt="yugioh card" />
         <div className="post__information">
@@ -19,7 +19,10 @@ function PostItem({ post, handleAdd }) {
             <p className="post__market-price post__text">
               Market price: ${post.marketPrice}
             </p>
-            <button className="post__add" onClick={() => handleAdd(post)}>
+            <button
+              className={darkMode ? "post__add darkmodebtn" : "post__add"}
+              onClick={() => handleAdd(post)}
+            >
               Add to Cart <i className="fas fa-plus-square post__add-icon"></i>
             </button>
           </div>
