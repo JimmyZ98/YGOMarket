@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Header.scss";
 import logo from "../../assets/Logo/YGOMarket-logo.png";
 import { Link } from "react-router-dom";
-import { NavLinks } from "./NavLinks";
 import axios from "axios";
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -13,6 +12,8 @@ function Header({
   showCart,
   handleClickMenu,
   handleCartClick,
+  darkMode,
+  handleDark,
 }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState({});
@@ -34,7 +35,7 @@ function Header({
   }, []);
 
   return (
-    <div className="header">
+    <div className={darkMode ? "header darkmode" : "header"}>
       <div className="header__inner">
         <Link to="/" className="header__logo-link">
           <img className="header__logo" src={logo} alt="ygomarket logo" />
@@ -63,36 +64,62 @@ function Header({
         </div>
         <div
           className={
-            menu
+            darkMode
+              ? menu
+                ? "header__nav-menu header__nav-menu--active darkmode"
+                : "header__nav-menu darkmode"
+              : menu
               ? "header__nav-menu header__nav-menu--active"
               : "header__nav-menu"
           }
         >
+          <i
+            className={
+              darkMode
+                ? "far fa-lightbulb header__night-tog"
+                : "fas fa-moon header__night-tog"
+            }
+            onClick={handleDark}
+          ></i>
           {isLoggedIn ? (
-            <p className="header__nav-link header__nav-link--welcome">
+            <p
+              className={
+                darkMode
+                  ? "header__nav-link header__nav-link--welcome darkmode"
+                  : "header__nav-link header__nav-link--welcome"
+              }
+            >
               Welcome {userInfo.username}
             </p>
           ) : (
             <Link
               to="/signin"
-              className="header__nav-link"
+              className={
+                darkMode ? "header__nav-link darkmode" : "header__nav-link"
+              }
               onClick={handleClickMenu}
             >
               Sign in
             </Link>
           )}
-          {NavLinks.map((item, index) => {
-            return (
-              <Link
-                to={item.url}
-                className={item.className}
-                key={index}
-                onClick={handleClickMenu}
-              >
-                {item.title}
-              </Link>
-            );
-          })}
+          <Link
+            to="/home"
+            className={
+              darkMode ? "header__nav-link darkmode" : "header__nav-link"
+            }
+            onClick={handleClickMenu}
+          >
+            Buy
+          </Link>
+          <Link
+            to="/sell"
+            className={
+              darkMode ? "header__nav-link darkmode" : "header__nav-link"
+            }
+            onClick={handleClickMenu}
+          >
+            Sell
+          </Link>
         </div>
       </div>
     </div>

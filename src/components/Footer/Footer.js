@@ -3,9 +3,9 @@ import logo from "../../assets/Logo/YGOMarket-logo.png";
 import "./Footer.scss";
 import { Link } from "react-router-dom";
 
-function Footer() {
+function Footer({ darkMode }) {
   return (
-    <div className="footer">
+    <div className={darkMode ? "footer darkmode" : "footer"}>
       <p className="footer__text">
         © 2022 — Designed and Developed by Jimmy Zhen
       </p>
