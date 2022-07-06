@@ -31,7 +31,6 @@ function SellPage({ cartItems, handleRemove, showCart, handleCartClick }) {
   const [cardRarity, setCardRarity] = useState([]);
   const [image, setImage] = useState([]);
   const [displayImage, setDisplayImage] = useState([]);
-  const [showPage, setShowPage] = useState({});
   const [promptLogin, setPromptLogin] = useState(true);
 
   useEffect(() => {
@@ -51,7 +50,6 @@ function SellPage({ cartItems, handleRemove, showCart, handleCartClick }) {
         })
         .then((res) => {
           console.log(res);
-          setShowPage(res.data);
           setPromptLogin(false);
         });
     }

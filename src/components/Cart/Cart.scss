@@ -4,8 +4,6 @@
 @use "../../styles/partials/mixins" as *;
 
 .cart {
-  width: 20rem;
-
   &__show {
     padding: 1rem;
     display: flex;

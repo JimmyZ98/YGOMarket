@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Header.scss";
 import logo from "../../assets/Logo/YGOMarket-logo.png";
 import { Link } from "react-router-dom";
 import { NavLinks } from "./NavLinks";
+import axios from "axios";
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Header({
   cartItems,
@@ -12,6 +14,25 @@ function Header({
   handleClickMenu,
   handleCartClick,
 }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    let token = sessionStorage.getItem("authToken");
+    if (!!token) {
+      axios
+        .get(`${API_URL}/current`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setIsLoggedIn(true);
+          setUserInfo(res.data);
+        });
+    }
+  }, []);
+
   return (
     <div className="header">
       <div className="header__inner">
@@ -47,6 +68,19 @@ function Header({
               : "header__nav-menu"
           }
         >
+          {isLoggedIn ? (
+            <p className="header__nav-link header__nav-link--welcome">
+              Welcome {userInfo.username}
+            </p>
+          ) : (
+            <Link
+              to="/signin"
+              className="header__nav-link"
+              onClick={handleClickMenu}
+            >
+              Sign in
+            </Link>
+          )}
           {NavLinks.map((item, index) => {
             return (
               <Link

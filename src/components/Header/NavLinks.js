@@ -1,9 +1,9 @@
 export const NavLinks = [
-  {
-    title: "Sign in",
-    url: "/signin",
-    className: "header__nav-link",
-  },
+  // {
+  //   title: "Sign in",
+  //   url: "/signin",
+  //   className: "header__nav-link",
+  // },
   {
     title: "Buy",
     url: "/home",

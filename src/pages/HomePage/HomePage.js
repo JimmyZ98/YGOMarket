@@ -11,11 +11,18 @@ function HomePage({
   handleRemove,
   showCart,
   handleCartClick,
+  showFilter,
+  handleFilterClick,
 }) {
   return (
     <div className="home">
-      {/* <Filter /> */}
+      <Filter showFilter={showFilter} />
       <div className="home__main">
+        <div className="home__filter-container">
+          <button className="home__filter" onClick={handleFilterClick}>
+            Filter
+          </button>
+        </div>
         <h1 className="home__title"> Shop Cards</h1>
         <ul className="home__posts-list">
           {posts.map((post) => (
