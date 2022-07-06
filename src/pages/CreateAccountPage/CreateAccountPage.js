@@ -12,19 +12,23 @@ function CreateAccountPage({
 }) {
   const handleRegister = (e) => {
     e.preventDefault();
-    axios
-      .post(`${API_URL}/register`, {
-        firstName: e.target.firstName.value,
-        lastName: e.target.lastName.value,
-        username: e.target.username.value,
-        password: e.target.password.value,
-      })
-      .then((res) => {
-        alert(res.data);
-        if (res.data === "Signed up!") {
-          window.location.assign(`/signin`);
-        }
-      });
+    if (e.target.password.value.length < 8) {
+      alert("Please enter a password with at least 8 characters.");
+    } else {
+      axios
+        .post(`${API_URL}/register`, {
+          firstName: e.target.firstName.value,
+          lastName: e.target.lastName.value,
+          username: e.target.username.value,
+          password: e.target.password.value,
+        })
+        .then((res) => {
+          alert(res.data);
+          if (res.data === "Signed up!") {
+            window.location.assign(`/signin`);
+          }
+        });
+    }
   };
   return (
     <div className="register">

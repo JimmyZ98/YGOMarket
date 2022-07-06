@@ -16,6 +16,8 @@ function App() {
   const [menu, setMenu] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [showCart, setShowCart] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   const handleAdd = (post) => {
     if (cartItems.find((x) => x.id === post.id)) {
@@ -43,6 +45,10 @@ function App() {
     setCartItems([]);
   };
 
+  const handleFilterClick = () => {
+    setShowFilter((prevShowFilter) => !prevShowFilter);
+  };
+
   useEffect(() => {
     axios.get(API_URL).then((response) => {
       setPosts(response.data);
@@ -62,6 +68,7 @@ function App() {
           showCart={showCart}
           handleClickMenu={handleClickMenu}
           handleCartClick={handleCartClick}
+          darkMode={darkMode}
         />
         <Switch>
           <Redirect from="/" to="/home" exact />
@@ -73,6 +80,9 @@ function App() {
               handleRemove={handleRemove}
               showCart={showCart}
               handleCartClick={handleCartClick}
+              showFilter={showFilter}
+              handleFilterClick={handleFilterClick}
+              darkMode={darkMode}
             />
           </Route>
           <Route path="/sell">
@@ -82,6 +92,7 @@ function App() {
               handleRemove={handleRemove}
               showCart={showCart}
               handleCartClick={handleCartClick}
+              darkMode={darkMode}
             />
           </Route>
           <Route path="/checkout">
@@ -91,6 +102,7 @@ function App() {
               showCart={showCart}
               handleCartClick={handleCartClick}
               handleEmptyCart={handleEmptyCart}
+              darkMode={darkMode}
             />
           </Route>
           <Route path="/signin">
@@ -99,6 +111,7 @@ function App() {
               handleRemove={handleRemove}
               showCart={showCart}
               handleCartClick={handleCartClick}
+              darkMode={darkMode}
             />
           </Route>
           <Route path="/register">
@@ -107,6 +120,7 @@ function App() {
               handleRemove={handleRemove}
               showCart={showCart}
               handleCartClick={handleCartClick}
+              darkMode={darkMode}
             />
           </Route>
         </Switch>

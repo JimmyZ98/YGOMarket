@@ -36,10 +36,10 @@
     @include tablet {
       position: static;
       height: auto;
-      width: 12rem;
-      margin-right: 4rem;
+      width: 33rem;
+      margin-right: 7rem;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: flex-end;
     }
 
     &--active {
@@ -58,16 +58,28 @@
     color: white;
     text-decoration: none;
 
+    @include tablet {
+      width: auto;
+      margin-left: 5rem;
+    }
     &:hover {
       background-color: $secondary-color;
       transition: all 200ms;
-      font-size: 1.2rem;
-      color: white;
+      text-decoration: underline;
+      color: $primary-highlight;
+      font-weight: 500;
 
       @include tablet {
         background-color: $primary-color;
-        transition: all 200ms;
-        font-size: 1.2rem;
+      }
+    }
+
+    &--welcome {
+      margin-bottom: 0;
+      &:hover {
+        text-decoration: none;
+        color: white;
+        font-weight: 400;
       }
     }
   }
@@ -82,7 +94,8 @@
     &:hover {
       cursor: pointer;
       transition: all 100ms;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
+      color: $primary-highlight;
     }
   }
 
