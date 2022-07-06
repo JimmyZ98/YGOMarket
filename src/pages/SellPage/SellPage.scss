@@ -9,6 +9,20 @@
   align-items: center;
   width: 100%;
 
+  &__login-notif {
+    padding: 10rem 10rem 20rem 10rem;
+    font-size: 2rem;
+
+    &--text {
+      text-decoration: inherit;
+      color: $primary-highlight;
+
+      &:hover {
+        color: $primary-color;
+        text-decoration: underline;
+      }
+    }
+  }
   &__title {
     margin: 1.5rem 0;
     @include tablet {

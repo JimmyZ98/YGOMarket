@@ -6,6 +6,7 @@
 .home {
   @include tablet {
     display: flex;
+    min-height: 45rem;
   }
 
   &__title {
