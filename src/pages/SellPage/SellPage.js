@@ -10,6 +10,7 @@ import { createFilterOptions } from "@mui/material/Autocomplete";
 import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
 import Cart from "../../components/Cart/Cart";
+import { Link } from "react-router-dom";
 
 const YGO_API_URL = "https://db.ygoprodeck.com/api/v7/cardinfo.php";
 const API_URL = process.env.REACT_APP_API_URL;
@@ -30,11 +31,30 @@ function SellPage({ cartItems, handleRemove, showCart, handleCartClick }) {
   const [cardRarity, setCardRarity] = useState([]);
   const [image, setImage] = useState([]);
   const [displayImage, setDisplayImage] = useState([]);
+  const [showPage, setShowPage] = useState({});
+  const [promptLogin, setPromptLogin] = useState(true);
 
   useEffect(() => {
     axios.get(YGO_API_URL).then((response) => {
       setCardData(response.data.data);
     });
+  }, []);
+
+  useEffect(() => {
+    let token = sessionStorage.getItem("authToken");
+    if (!!token) {
+      axios
+        .get(`${API_URL}/current`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          setShowPage(res.data);
+          setPromptLogin(false);
+        });
+    }
   }, []);
 
   const optionsLimit = 10;
@@ -84,7 +104,15 @@ function SellPage({ cartItems, handleRemove, showCart, handleCartClick }) {
     });
   };
 
-  return (
+  return promptLogin ? (
+    <div className="sell__login-notif">
+      Please{" "}
+      <Link to="/signin" className="sell__login-notif--text">
+        login
+      </Link>
+      .
+    </div>
+  ) : (
     <ThemeProvider theme={theme}>
       <div className="sell">
         <h1 className="sell__title">Sell Card</h1>

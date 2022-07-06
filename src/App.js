@@ -8,6 +8,7 @@ import SellPage from "./pages/SellPage/SellPage";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import axios from "axios";
 import SigninPage from "./pages/SigninPage/SigninPage";
+import CreateAccountPage from "./pages/CreateAccountPage/CreateAccountPage";
 const API_URL = process.env.REACT_APP_API_URL;
 
 function App() {
@@ -94,6 +95,14 @@ function App() {
           </Route>
           <Route path="/signin">
             <SigninPage
+              cartItems={cartItems}
+              handleRemove={handleRemove}
+              showCart={showCart}
+              handleCartClick={handleCartClick}
+            />
+          </Route>
+          <Route path="/register">
+            <CreateAccountPage
               cartItems={cartItems}
               handleRemove={handleRemove}
               showCart={showCart}
