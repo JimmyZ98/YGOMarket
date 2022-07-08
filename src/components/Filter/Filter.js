@@ -4,7 +4,7 @@ import cardtype from "./cardtype.json";
 import mosntertype from "./monstertype.json";
 import attribute from "./attribute.json";
 
-function Filter({ showFilter, darkMode }) {
+function Filter({ showFilter, darkMode, handleSearch }) {
   return (
     <div className="filter">
       <div
@@ -24,6 +24,7 @@ function Filter({ showFilter, darkMode }) {
             className={darkMode ? "filter__search darkmodef" : "filter__search"}
             type="text"
             placeholder="Search for a card"
+            onChange={handleSearch}
           />
           <div className="filter__form-group">
             <label className="filter__label">Card type</label>
