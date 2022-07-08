@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./HomePage.scss";
 import PostItem from "../../components/PostItem/PostItem";
 import Cart from "../../components/Cart/Cart";
@@ -15,9 +15,20 @@ function HomePage({
   handleFilterClick,
   darkMode,
 }) {
+  const [search, setSearch] = useState("");
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
   return (
     <div className={darkMode ? "home darkmodeb" : "home"}>
-      <Filter showFilter={showFilter} darkMode={darkMode} />
+      <Filter
+        showFilter={showFilter}
+        darkMode={darkMode}
+        search={search}
+        handleSearch={handleSearch}
+      />
       <div className="home__main">
         <div className="home__filter-container">
           <button className="home__filter" onClick={handleFilterClick}>
@@ -26,14 +37,24 @@ function HomePage({
         </div>
         <h1 className="home__title"> Shop Cards</h1>
         <ul className="home__posts-list">
-          {posts.map((post) => (
-            <PostItem
-              key={post.id}
-              post={post}
-              handleAdd={handleAdd}
-              darkMode={darkMode}
-            />
-          ))}
+          {posts
+            .filter((x) => {
+              if (search == "") {
+                return x;
+              } else if (
+                x.cardName.toLowerCase().includes(search.toLowerCase())
+              ) {
+                return x;
+              }
+            })
+            .map((post) => (
+              <PostItem
+                key={post.id}
+                post={post}
+                handleAdd={handleAdd}
+                darkMode={darkMode}
+              />
+            ))}
         </ul>
       </div>
       <Cart

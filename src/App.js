@@ -9,6 +9,7 @@ import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import axios from "axios";
 import SigninPage from "./pages/SigninPage/SigninPage";
 import CreateAccountPage from "./pages/CreateAccountPage/CreateAccountPage";
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 const API_URL = process.env.REACT_APP_API_URL;
 
 function App() {
@@ -60,7 +61,15 @@ function App() {
   }, []);
 
   if (posts.length === 0) {
-    return <h1>loading</h1>;
+    return (
+      <div className="loading">
+        <ClimbingBoxLoader
+          className="loading__loader"
+          color={"#f72585"}
+          size={50}
+        />
+      </div>
+    );
   }
 
   return (
