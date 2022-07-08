@@ -86,10 +86,6 @@ function SellPage({
     },
   ];
 
-  // `${API_URL}sell`, e, {
-  //   headers: { "Content-Type": "application/json" },
-  // }
-
   //form controls
   const { control, handleSubmit } = useForm();
 
@@ -98,6 +94,7 @@ function SellPage({
     e.image = image;
     e.marketPrice = marketPrice;
     e.sellerId = 1;
+    console.log(e);
     axios.post(`${API_URL}/sell`, e).then((response) => {
       if (response) {
         alert("Your card has been listed!");
@@ -115,6 +112,12 @@ function SellPage({
         login
       </Link>
       .
+      <Cart
+        cartItems={cartItems}
+        handleRemove={handleRemove}
+        showCart={showCart}
+        handleCartClick={handleCartClick}
+      />
     </div>
   ) : (
     <ThemeProvider theme={theme}>
@@ -212,9 +215,6 @@ function SellPage({
             <Controller
               render={({ field: { onChange } }) => (
                 <Autocomplete
-                  isOptionEqualToValue={(option, value) =>
-                    option.id === value.id
-                  }
                   freeSolo
                   disablePortal
                   id="sell__price"
