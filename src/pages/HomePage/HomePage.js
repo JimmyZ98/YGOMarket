@@ -62,6 +62,7 @@ function HomePage({
         handleRemove={handleRemove}
         showCart={showCart}
         handleCartClick={handleCartClick}
+        darkMode={darkMode}
       />
     </div>
   );

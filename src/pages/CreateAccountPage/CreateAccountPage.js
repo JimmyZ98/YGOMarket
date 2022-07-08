@@ -86,6 +86,7 @@ function CreateAccountPage({
         handleRemove={handleRemove}
         showCart={showCart}
         handleCartClick={handleCartClick}
+        darkMode={darkMode}
       />
     </div>
   );

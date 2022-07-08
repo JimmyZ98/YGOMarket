@@ -2,13 +2,27 @@ import React, { useState } from "react";
 import "./Cart.scss";
 import { Link } from "react-router-dom";
 
-function Cart({ cartItems, handleRemove, showCart, handleCartClick }) {
+function Cart({
+  cartItems,
+  handleRemove,
+  showCart,
+  handleCartClick,
+  darkMode,
+}) {
   const subtotal = cartItems.reduce((x, y) => x + y.price, 0);
 
   return (
     <div className="cart">
       <div
-        className={showCart ? "cart__show cart__show--active" : "cart__show"}
+        className={
+          darkMode
+            ? showCart
+              ? "cart__show cart__show--active darkmodefb"
+              : "cart__show darkmodefb"
+            : showCart
+            ? "cart__show cart__show--active"
+            : "cart__show"
+        }
       >
         <h1>Cart</h1>
         <div className="cart__main">
