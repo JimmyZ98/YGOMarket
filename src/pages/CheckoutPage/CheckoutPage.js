@@ -26,6 +26,7 @@ function CheckoutPage({
   showCart,
   handleCartClick,
   handleEmptyCart,
+  darkMode,
 }) {
   let cartItemIds = cartItems.map((x) => x.id);
 
@@ -63,141 +64,146 @@ function CheckoutPage({
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="checkout">
-        <h1 className="checkout__title">Checkout</h1>
-        <div className="checkout__form-container">
-          <form className="checkout__form" onSubmit={handleSubmit(onSubmit)}>
-            <p className="checkout__contact">Shipping Information</p>
-            <Controller
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  id="checkout__fullName"
-                  label="Full name"
-                  variant="outlined"
-                  sx={{ width: 1 }}
-                />
-              )}
-              name="fullName"
-              control={control}
-              defaultValue=""
-            />
-            <Controller
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  id="checkout__phone"
-                  label="Phone number"
-                  variant="outlined"
-                  sx={{ width: 1 }}
-                />
-              )}
-              name="phone"
-              control={control}
-              defaultValue=""
-            />
-            <Controller
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  id="checkout__email"
-                  label="Email"
-                  variant="outlined"
-                  sx={{ width: 1 }}
-                />
-              )}
-              name="email"
-              control={control}
-              defaultValue=""
-            />
-            <Controller
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  id="checkout__address"
-                  label="Address"
-                  variant="outlined"
-                  sx={{ width: 1 }}
-                />
-              )}
-              name="address"
-              control={control}
-              defaultValue=""
-            />
-            <Controller
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  id="checkout__address2"
-                  label="Apt, Suite, Unit, Building"
-                  variant="outlined"
-                  sx={{ width: 1 }}
-                />
-              )}
-              name="address2"
-              control={control}
-              defaultValue=""
-            />
-            <Controller
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  id="checkout__city"
-                  label="City"
-                  variant="outlined"
-                  sx={{ width: 1 }}
-                />
-              )}
-              name="city"
-              control={control}
-              defaultValue=""
-            />
-            <Controller
-              render={({ field: { onChange } }) => (
-                <Autocomplete
-                  disablePortal
-                  id="checkout__province"
-                  options={provinces}
-                  sx={{ width: 1 }}
-                  onChange={(e, data) => {
-                    onChange(data);
-                    return data;
-                  }}
-                  renderInput={(params) => (
-                    <TextField {...params} label="Province/Territory" />
-                  )}
-                />
-              )}
-              name="province"
-              control={control}
-              defaultValue=""
-            />
-            <Controller
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  id="checkout__postalCode"
-                  label="Postal code"
-                  variant="outlined"
-                  sx={{ width: 1 }}
-                />
-              )}
-              name="postalCode"
-              control={control}
-              defaultValue=""
-            />
+      <div
+        className={darkMode ? "checkout__outer darkmodel" : "checkout__outer"}
+      >
+        <div className={darkMode ? "checkout darkmodel" : "checkout"}>
+          <h1 className="checkout__title">Checkout</h1>
+          <div className="checkout__form-container">
+            <form className="checkout__form" onSubmit={handleSubmit(onSubmit)}>
+              <p className="checkout__contact">Shipping Information</p>
+              <Controller
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    id="checkout__fullName"
+                    label="Full name"
+                    variant="outlined"
+                    sx={{ width: 1 }}
+                  />
+                )}
+                name="fullName"
+                control={control}
+                defaultValue=""
+              />
+              <Controller
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    id="checkout__phone"
+                    label="Phone number"
+                    variant="outlined"
+                    sx={{ width: 1 }}
+                  />
+                )}
+                name="phone"
+                control={control}
+                defaultValue=""
+              />
+              <Controller
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    id="checkout__email"
+                    label="Email"
+                    variant="outlined"
+                    sx={{ width: 1 }}
+                  />
+                )}
+                name="email"
+                control={control}
+                defaultValue=""
+              />
+              <Controller
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    id="checkout__address"
+                    label="Address"
+                    variant="outlined"
+                    sx={{ width: 1 }}
+                  />
+                )}
+                name="address"
+                control={control}
+                defaultValue=""
+              />
+              <Controller
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    id="checkout__address2"
+                    label="Apt, Suite, Unit, Building"
+                    variant="outlined"
+                    sx={{ width: 1 }}
+                  />
+                )}
+                name="address2"
+                control={control}
+                defaultValue=""
+              />
+              <Controller
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    id="checkout__city"
+                    label="City"
+                    variant="outlined"
+                    sx={{ width: 1 }}
+                  />
+                )}
+                name="city"
+                control={control}
+                defaultValue=""
+              />
+              <Controller
+                render={({ field: { onChange } }) => (
+                  <Autocomplete
+                    disablePortal
+                    id="checkout__province"
+                    options={provinces}
+                    sx={{ width: 1 }}
+                    onChange={(e, data) => {
+                      onChange(data);
+                      return data;
+                    }}
+                    renderInput={(params) => (
+                      <TextField {...params} label="Province/Territory" />
+                    )}
+                  />
+                )}
+                name="province"
+                control={control}
+                defaultValue=""
+              />
+              <Controller
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    id="checkout__postalCode"
+                    label="Postal code"
+                    variant="outlined"
+                    sx={{ width: 1 }}
+                  />
+                )}
+                name="postalCode"
+                control={control}
+                defaultValue=""
+              />
 
-            <button className="checkout__form-button" type="submit">
-              Confirm
-            </button>
-          </form>
+              <button className="checkout__form-button" type="submit">
+                Confirm
+              </button>
+            </form>
+          </div>
+          <Cart
+            cartItems={cartItems}
+            handleRemove={handleRemove}
+            showCart={showCart}
+            handleCartClick={handleCartClick}
+            darkMode={darkMode}
+          />
         </div>
-        <Cart
-          cartItems={cartItems}
-          handleRemove={handleRemove}
-          showCart={showCart}
-          handleCartClick={handleCartClick}
-        />
       </div>
     </ThemeProvider>
   );

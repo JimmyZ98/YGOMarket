@@ -1,7 +1,7 @@
 import React from "react";
 import Cart from "../../components/Cart/Cart";
 import "./SigninPage.scss";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -12,13 +12,10 @@ function SigninPage({
   handleCartClick,
   darkMode,
 }) {
+  const history = useHistory();
+
   const handleSignIn = (e) => {
     e.preventDefault();
-
-    console.log({
-      username: e.target.username.value,
-      password: e.target.password.value,
-    });
 
     axios
       .post(`${API_URL}/login`, {
@@ -29,8 +26,10 @@ function SigninPage({
         console.log(res);
         const { token } = res.data;
         sessionStorage.setItem("authToken", token);
-        window.location.assign(`/`);
+        // history.goBack();
+        window.location.reload();
       })
+      .then(history.goBack())
       .catch((err) => {
         console.log(err);
       });
@@ -77,6 +76,7 @@ function SigninPage({
         handleRemove={handleRemove}
         showCart={showCart}
         handleCartClick={handleCartClick}
+        darkMode={darkMode}
       />
     </div>
   );
