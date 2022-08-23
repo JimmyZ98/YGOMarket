@@ -87,7 +87,7 @@ function SellPage({
   ];
 
   //form controls
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, useFormContext } = useForm();
 
   const onSubmit = (e) => {
     e.rarity = cardRarity;
@@ -213,18 +213,23 @@ function SellPage({
               defaultValue=""
             />
             <Controller
-              render={({ field: { onChange } }) => (
+              render={({ 
+                field: { onChange }
+              }) => (
                 <Autocomplete
                   freeSolo
                   disablePortal
                   id="sell__price"
                   className="sell__form-input"
                   options={suggestPrice}
-                  getOptionLabel={(suggesPrice) => suggesPrice.label}
+                  getOptionLabel={(suggestPrice) => suggestPrice.label ? suggestPrice.label : suggestPrice}
                   sx={{ width: 1, marginBottom: -1.75 }}
                   onChange={(e, data) => {
+                    if(e.target.value) {
+                    onChange(e.target.value);
+                    } else {
                     onChange(data.value);
-                    return data.value;
+                    }
                   }}
                   renderInput={(params) => (
                     <TextField
