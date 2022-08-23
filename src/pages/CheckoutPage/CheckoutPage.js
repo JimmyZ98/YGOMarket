@@ -9,7 +9,12 @@ import TextField from "@mui/material/TextField";
 import { useForm, Controller } from "react-hook-form";
 import { provinces } from "./Provinces";
 import Cart from "../../components/Cart/Cart";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js"
 const API_URL = process.env.REACT_APP_API_URL;
+
+const promise = loadStripe('pk_test_51La6GoAeQr32fnN0MR7udScy4h9uGJ70pOuwBCzAWmmdUBG8kHVnG27cKfAO4kEGAJDNpkfv30wP43mQTVPO8Wes00PPxHUs7e');
+
 
 const regexPhone = new RegExp(
   /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,

@@ -33,7 +33,7 @@ function Cart({
             <div key={item.id} className="cart__item">
               <p className="cart__item-name">{item.cardName}</p>
               <div className="cart__item--right">
-                <p className="cart__item-price">${item.price}</p>
+                <p className="cart__item-price">${parseFloat(item.price).toFixed(2)}</p>
                 <p
                   className="cart__item-remove"
                   onClick={() => handleRemove(item)}
@@ -45,7 +45,7 @@ function Cart({
           ))}
           <div className="cart__subtotal-container">
             <p className="cart__subtotal-text">Subtotal</p>
-            <p className="cart__subtotal">${subtotal}</p>
+            <p className="cart__subtotal">${parseFloat(subtotal).toFixed(2)}</p>
           </div>
           <Link
             to="/checkout"

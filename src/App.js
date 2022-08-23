@@ -10,7 +10,11 @@ import axios from "axios";
 import SigninPage from "./pages/SigninPage/SigninPage";
 import CreateAccountPage from "./pages/CreateAccountPage/CreateAccountPage";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js"
 const API_URL = process.env.REACT_APP_API_URL;
+
+const promise = loadStripe('pk_test_51La6GoAeQr32fnN0MR7udScy4h9uGJ70pOuwBCzAWmmdUBG8kHVnG27cKfAO4kEGAJDNpkfv30wP43mQTVPO8Wes00PPxHUs7e');
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -110,6 +114,7 @@ function App() {
             />
           </Route>
           <Route path="/checkout">
+            <Elements stripe = {promise}>
             <CheckoutPage
               cartItems={cartItems}
               handleRemove={handleRemove}
@@ -118,6 +123,7 @@ function App() {
               handleEmptyCart={handleEmptyCart}
               darkMode={darkMode}
             />
+            </Elements>
           </Route>
           <Route path="/signin">
             <SigninPage
