@@ -63,15 +63,19 @@ function CheckoutPage({
     }
   };
 
-  //Stripe payment processing 
+  const subtotal = cartItems.reduce((x, y) => x + y.price, 0);
+
+  //Stripe payment processing
   const stripe = useStripe();
   const elements = useElements();
 
+  const [succeeded, setSucceeded] = useState(false);
+  const [processing, setProcessing] = useState("");
   const [error, setError] = useState(null);
-  const [disabled, setDisabled] = useState(null);
+  const [disabled, setDisabled] = useState(true);
 
   const handleCardSubmit = (e) => {
-    console.log('hello');
+    console.log("hello");
   };
 
   const handleCardChange = (e) => {
@@ -90,7 +94,14 @@ function CheckoutPage({
             <p>Shoping Cart</p>
             <ul className="checkout__shopping-cart-items">
               {cartItems.map((item) => (
-              <CartItem key={item.id} item={item} cartItems={cartItems} posts={posts} darkMode={darkMode} handleRemove={handleRemove}/> 
+                <CartItem
+                  key={item.id}
+                  item={item}
+                  cartItems={cartItems}
+                  posts={posts}
+                  darkMode={darkMode}
+                  handleRemove={handleRemove}
+                />
               ))}
             </ul>
           </div>
@@ -227,7 +238,16 @@ function CheckoutPage({
             </div>
             <div className="checkout__payment-details">
               <form onSubmit={handleCardSubmit}>
-                <CardElement onChange={handleCardChange}/>
+                <CardElement onChange={handleCardChange} />
+                <div className="checkout__price-container">
+                  <p className="checkout__subtotal">
+                    ${parseFloat(subtotal).toFixed(2)}
+                  </p>
+                </div>
+                <button disabled={processing || disabled || succeeded}>
+                  <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
+                </button>
+                {error && <div>{error}</div>}
               </form>
             </div>
           </div>
