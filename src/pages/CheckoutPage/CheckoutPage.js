@@ -74,17 +74,17 @@ function CheckoutPage({
   const stripe = useStripe();
   const elements = useElements();
 
-  useEffect(() => {
-    const getClientSecret = async () => {
-      const response = await axios.post(
-        `${API_URL}/payments/create?total=${Math.round(
-          getCartTotal(cartItems) * 100
-        )}`
-      );
-      setClientSecret(response.data.clientSecret);
-    };
-    getClientSecret();
-  }, [cartItems]);
+  // useEffect(() => {
+  //   const getClientSecret = async () => {
+  //     const response = await axios.post(
+  //       `${API_URL}/payments/create?total=${Math.round(
+  //         getCartTotal(cartItems) * 100
+  //       )}`
+  //     );
+  //     setClientSecret(response.data.clientSecret);
+  //   };
+  //   getClientSecret();
+  // }, [cartItems]);
 
   const [succeeded, setSucceeded] = useState(false);
   const [processing, setProcessing] = useState("");
