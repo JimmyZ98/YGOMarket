@@ -11,10 +11,12 @@ import SigninPage from "./pages/SigninPage/SigninPage";
 import CreateAccountPage from "./pages/CreateAccountPage/CreateAccountPage";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js"
+import { Elements } from "@stripe/react-stripe-js";
 const API_URL = process.env.REACT_APP_API_URL;
+const STRIPE_PUBLIC_API =
+  "pk_test_51La6GoAeQr32fnN0MR7udScy4h9uGJ70pOuwBCzAWmmdUBG8kHVnG27cKfAO4kEGAJDNpkfv30wP43mQTVPO8Wes00PPxHUs7e";
 
-const promise = loadStripe('pk_test_51La6GoAeQr32fnN0MR7udScy4h9uGJ70pOuwBCzAWmmdUBG8kHVnG27cKfAO4kEGAJDNpkfv30wP43mQTVPO8Wes00PPxHUs7e');
+const promise = loadStripe(STRIPE_PUBLIC_API);
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -114,16 +116,16 @@ function App() {
             />
           </Route>
           <Route path="/checkout">
-            <Elements stripe = {promise}>
-            <CheckoutPage
-              cartItems={cartItems}
-              handleRemove={handleRemove}
-              showCart={showCart}
-              handleCartClick={handleCartClick}
-              handleEmptyCart={handleEmptyCart}
-              darkMode={darkMode}
-              posts={posts}
-            />
+            <Elements stripe={promise}>
+              <CheckoutPage
+                cartItems={cartItems}
+                handleRemove={handleRemove}
+                showCart={showCart}
+                handleCartClick={handleCartClick}
+                handleEmptyCart={handleEmptyCart}
+                darkMode={darkMode}
+                posts={posts}
+              />
             </Elements>
           </Route>
           <Route path="/signin">

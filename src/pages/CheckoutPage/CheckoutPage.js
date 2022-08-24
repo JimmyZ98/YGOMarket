@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../../styles/theme";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,6 +11,7 @@ import { provinces } from "./Provinces";
 import Cart from "../../components/Cart/Cart";
 import CartItem from "../../components/CartItem/CartItem";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useHistory } from "react-router-dom";
 const API_URL = process.env.REACT_APP_API_URL;
 
 const regexPhone = new RegExp(
@@ -63,19 +64,51 @@ function CheckoutPage({
     }
   };
 
-  const subtotal = cartItems.reduce((x, y) => x + y.price, 0);
+  const getCartTotal = (cart) => {
+    return cart.reduce((x, y) => x + y.price, 0);
+  };
+  const subtotal = getCartTotal(cartItems);
+  const history = useHistory();
 
   //Stripe payment processing
   const stripe = useStripe();
   const elements = useElements();
 
+  useEffect(() => {
+    const getClientSecret = async () => {
+      const response = await axios.post(
+        `${API_URL}/payments/create?total=${Math.round(
+          getCartTotal(cartItems) * 100
+        )}`
+      );
+      setClientSecret(response.data.clientSecret);
+    };
+    getClientSecret();
+  }, [cartItems]);
+
   const [succeeded, setSucceeded] = useState(false);
   const [processing, setProcessing] = useState("");
   const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(true);
+  const [clientSecret, setClientSecret] = useState(true);
 
-  const handleCardSubmit = (e) => {
-    console.log("hello");
+  const handleCardSubmit = async (e) => {
+    e.preventDefault();
+    setProcessing(true);
+
+    const payload = await stripe
+      .confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+        },
+      })
+      .then(({ paymentIntent }) => {
+        setSucceeded(true);
+        setError(null);
+        setProcessing(false);
+
+        history.replace("/orders");
+      });
   };
 
   const handleCardChange = (e) => {
