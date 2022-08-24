@@ -122,6 +122,7 @@ function App() {
               handleCartClick={handleCartClick}
               handleEmptyCart={handleEmptyCart}
               darkMode={darkMode}
+              posts={posts}
             />
             </Elements>
           </Route>

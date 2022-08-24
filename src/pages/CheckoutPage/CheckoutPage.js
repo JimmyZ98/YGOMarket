@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../../styles/theme";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -9,12 +9,9 @@ import TextField from "@mui/material/TextField";
 import { useForm, Controller } from "react-hook-form";
 import { provinces } from "./Provinces";
 import Cart from "../../components/Cart/Cart";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js"
+import CartItem from "../../components/CartItem/CartItem";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 const API_URL = process.env.REACT_APP_API_URL;
-
-const promise = loadStripe('pk_test_51La6GoAeQr32fnN0MR7udScy4h9uGJ70pOuwBCzAWmmdUBG8kHVnG27cKfAO4kEGAJDNpkfv30wP43mQTVPO8Wes00PPxHUs7e');
-
 
 const regexPhone = new RegExp(
   /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
@@ -32,10 +29,9 @@ function CheckoutPage({
   handleCartClick,
   handleEmptyCart,
   darkMode,
+  posts,
 }) {
   let cartItemIds = cartItems.map((x) => x.id);
-
-  console.log(cartItemIds);
 
   const { control, handleSubmit } = useForm();
 
@@ -67,6 +63,22 @@ function CheckoutPage({
     }
   };
 
+  //Stripe payment processing 
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const [error, setError] = useState(null);
+  const [disabled, setDisabled] = useState(null);
+
+  const handleCardSubmit = (e) => {
+    console.log('hello');
+  };
+
+  const handleCardChange = (e) => {
+    setDisabled(e.empty);
+    setError(e.error ? e.error.message : "");
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <div
@@ -74,6 +86,14 @@ function CheckoutPage({
       >
         <div className={darkMode ? "checkout darkmodel" : "checkout"}>
           <h1 className="checkout__title">Checkout</h1>
+          <div className="checkout__shopping-cart">
+            <p>Shoping Cart</p>
+            <ul className="checkout__shopping-cart-items">
+              {cartItems.map((item) => (
+              <CartItem key={item.id} item={item} cartItems={cartItems} posts={posts} darkMode={darkMode} handleRemove={handleRemove}/> 
+              ))}
+            </ul>
+          </div>
           <div className="checkout__form-container">
             <form className="checkout__form" onSubmit={handleSubmit(onSubmit)}>
               <p className="checkout__contact">Shipping Information</p>
@@ -200,6 +220,16 @@ function CheckoutPage({
                 Confirm
               </button>
             </form>
+          </div>
+          <div className="checkout__payment">
+            <div className="checkout__payment-title">
+              <p>Payment Method</p>
+            </div>
+            <div className="checkout__payment-details">
+              <form onSubmit={handleCardSubmit}>
+                <CardElement onChange={handleCardChange}/>
+              </form>
+            </div>
           </div>
           <Cart
             cartItems={cartItems}
