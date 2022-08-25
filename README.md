@@ -1,6 +1,6 @@
 # YGOMarket - Yu-Gi-Oh E-commerce Site
 
-YGOMarket is deployed using Heroku! [YGOMarket](https://ygomarket.herokuapp.com/home "YGOMarket)
+YGOMarket is deployed using Heroku! https://ygomarket.herokuapp.com/home
 YGOMarket is an e-commerce website that allows users to buy and sell Yu-Gi-Oh cards from one another.
 
 ## Features
@@ -56,7 +56,7 @@ YGOMarket is an e-commerce website that allows users to buy and sell Yu-Gi-Oh ca
 
 Create a .env file and include:
 
-- REACT_APP_API_URL: example = "http://localhost:8080"
+- REACT_APP_API_URL: example = `http://localhost:8080`
 
 ### Back-end
 
