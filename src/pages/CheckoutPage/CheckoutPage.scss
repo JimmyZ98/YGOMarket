@@ -32,7 +32,29 @@
       cursor: pointer;
     }
   }
-  &__shopping-cart-items{
+  &__shopping-cart-items {
     padding: 0;
   }
+
+  &__subtitle {
+    font-size: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  &__subtitle--payment {
+    margin-top: 1.5rem;
+  }
+
+  &__payment-info {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__form-button {
+    margin-top: 1rem;
+  }
+}
+
+.MuiInputBase-root {
+  margin-bottom: 0.75rem;
 }

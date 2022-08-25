@@ -14,22 +14,6 @@ function Cart({
 }) {
   const subtotal = cartItems.reduce((x, y) => x + y.price, 0);
 
-  const handleCheckout = (e) => {
-    e.preventDefault();
-    console.log("button clicked");
-    if (cartItems.length < 1) {
-      alert("Cart is empty");
-    } else {
-      axios
-        .post(`${API_URL}/create-checkout-session`, {
-          id: 1,
-        })
-        .then((res) => {
-          window.location = res.data.url;
-        });
-    }
-  };
-
   return (
     <div className="cart">
       <div
@@ -68,16 +52,13 @@ function Cart({
             <p className="cart__subtotal-text">Subtotal</p>
             <p className="cart__subtotal">${parseFloat(subtotal).toFixed(2)}</p>
           </div>
-          {/* <Link
+          <Link
             to="/checkout"
             className="cart__checkout-link"
             onClick={handleCartClick}
           >
             <button className="cart__checkout">Proceed to Checkout</button>
-          </Link> */}
-          <button className="cart_checkout" onClick={(e) => handleCheckout(e)}>
-            Proceed to Checkout
-          </button>
+          </Link>
         </div>
       </div>
     </div>

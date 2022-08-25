@@ -57,10 +57,16 @@ function CheckoutPage({
       axios.post(`${API_URL}/checkout`, cartItemIds).then((response) => {
         if (response) {
           handleEmptyCart();
-          alert("Your order has been confirmed!");
-          window.location.assign(`/home`);
         }
       });
+      //stripe payment processing
+      axios
+        .post(`${API_URL}/create-checkout-session`, {
+          id: 1,
+        })
+        .then((res) => {
+          window.location = res.data.url;
+        });
     }
   };
 
@@ -70,52 +76,6 @@ function CheckoutPage({
   const subtotal = getCartTotal(cartItems);
   const history = useHistory();
 
-  //Stripe payment processing
-  const stripe = useStripe();
-  const elements = useElements();
-
-  // useEffect(() => {
-  //   const getClientSecret = async () => {
-  //     const response = await axios.post(
-  //       `${API_URL}/payments/create?total=${Math.round(
-  //         getCartTotal(cartItems) * 100
-  //       )}`
-  //     );
-  //     setClientSecret(response.data.clientSecret);
-  //   };
-  //   getClientSecret();
-  // }, [cartItems]);
-
-  const [succeeded, setSucceeded] = useState(false);
-  const [processing, setProcessing] = useState("");
-  const [error, setError] = useState(null);
-  const [disabled, setDisabled] = useState(true);
-  const [clientSecret, setClientSecret] = useState(true);
-
-  const handleCardSubmit = async (e) => {
-    e.preventDefault();
-    setProcessing(true);
-
-    const payload = await stripe
-      .confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: elements.getElement(CardElement),
-        },
-      })
-      .then(({ paymentIntent }) => {
-        setSucceeded(true);
-        setError(null);
-        setProcessing(false);
-
-        history.replace("/orders");
-      });
-  };
-
-  const handleCardChange = (e) => {
-    setDisabled(e.empty);
-    setError(e.error ? e.error.message : "");
-  };
-
   return (
     <ThemeProvider theme={theme}>
       <div
@@ -124,7 +84,7 @@ function CheckoutPage({
         <div className={darkMode ? "checkout darkmodel" : "checkout"}>
           <h1 className="checkout__title">Checkout</h1>
           <div className="checkout__shopping-cart">
-            <p>Shoping Cart</p>
+            <p className="checkout__subtitle">Shoping Cart</p>
             <ul className="checkout__shopping-cart-items">
               {cartItems.map((item) => (
                 <CartItem
@@ -140,7 +100,7 @@ function CheckoutPage({
           </div>
           <div className="checkout__form-container">
             <form className="checkout__form" onSubmit={handleSubmit(onSubmit)}>
-              <p className="checkout__contact">Shipping Information</p>
+              <p className="checkout__subtitle">Shipping Information</p>
               <Controller
                 render={({ field }) => (
                   <TextField
@@ -259,30 +219,21 @@ function CheckoutPage({
                 control={control}
                 defaultValue=""
               />
-
-              <button className="checkout__form-button" type="submit">
-                Confirm
-              </button>
-            </form>
-          </div>
-          <div className="checkout__payment">
-            <div className="checkout__payment-title">
-              <p>Payment Method</p>
-            </div>
-            <div className="checkout__payment-details">
-              <form onSubmit={handleCardSubmit}>
-                <CardElement onChange={handleCardChange} />
-                <div className="checkout__price-container">
-                  <p className="checkout__subtotal">
-                    ${parseFloat(subtotal).toFixed(2)}
+              <div className="checkout__payment">
+                <p className="checkout__subtitle checkout__subtitle--payment">
+                  Payment
+                </p>
+                <div className="checkout__payment-info">
+                  <p className="checkout__payment-text">Total</p>
+                  <p className="checkout__payment-amount">
+                    ${Math.round(subtotal * 100) / 100}
                   </p>
                 </div>
-                <button disabled={processing || disabled || succeeded}>
-                  <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
-                </button>
-                {error && <div>{error}</div>}
-              </form>
-            </div>
+              </div>
+              <button className="checkout__form-button" type="submit">
+                Proceed to Payment
+              </button>
+            </form>
           </div>
           <Cart
             cartItems={cartItems}

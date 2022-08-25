@@ -12,6 +12,8 @@ import CreateAccountPage from "./pages/CreateAccountPage/CreateAccountPage";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import SuccessPage from "./pages/SuccessPage/SuccessPage";
+import CancelPage from "./pages/CancelPage/CancelPage";
 const API_URL = process.env.REACT_APP_API_URL;
 const STRIPE_PUBLIC_API =
   "pk_test_51La6GoAeQr32fnN0MR7udScy4h9uGJ70pOuwBCzAWmmdUBG8kHVnG27cKfAO4kEGAJDNpkfv30wP43mQTVPO8Wes00PPxHUs7e";
@@ -139,6 +141,26 @@ function App() {
           </Route>
           <Route path="/register">
             <CreateAccountPage
+              cartItems={cartItems}
+              handleRemove={handleRemove}
+              showCart={showCart}
+              handleCartClick={handleCartClick}
+              darkMode={darkMode}
+            />
+          </Route>
+          <Route path="/success">
+            <SuccessPage
+              posts={posts}
+              cartItems={cartItems}
+              handleRemove={handleRemove}
+              showCart={showCart}
+              handleCartClick={handleCartClick}
+              darkMode={darkMode}
+            />
+          </Route>
+          <Route path="/cancel">
+            <CancelPage
+              posts={posts}
               cartItems={cartItems}
               handleRemove={handleRemove}
               showCart={showCart}
