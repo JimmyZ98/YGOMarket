@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "./Cart.scss";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { FormControlUnstyledContext } from "@mui/base";
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Cart({
   cartItems,
@@ -10,6 +13,22 @@ function Cart({
   darkMode,
 }) {
   const subtotal = cartItems.reduce((x, y) => x + y.price, 0);
+
+  const handleCheckout = (e) => {
+    e.preventDefault();
+    console.log("button clicked");
+    if (cartItems.length < 1) {
+      alert("Cart is empty");
+    } else {
+      axios
+        .post(`${API_URL}/create-checkout-session`, {
+          id: 1,
+        })
+        .then((res) => {
+          window.location = res.data.url;
+        });
+    }
+  };
 
   return (
     <div className="cart">
@@ -33,7 +52,9 @@ function Cart({
             <div key={item.id} className="cart__item">
               <p className="cart__item-name">{item.cardName}</p>
               <div className="cart__item--right">
-                <p className="cart__item-price">${parseFloat(item.price).toFixed(2)}</p>
+                <p className="cart__item-price">
+                  ${parseFloat(item.price).toFixed(2)}
+                </p>
                 <p
                   className="cart__item-remove"
                   onClick={() => handleRemove(item)}
@@ -47,13 +68,16 @@ function Cart({
             <p className="cart__subtotal-text">Subtotal</p>
             <p className="cart__subtotal">${parseFloat(subtotal).toFixed(2)}</p>
           </div>
-          <Link
+          {/* <Link
             to="/checkout"
             className="cart__checkout-link"
             onClick={handleCartClick}
           >
             <button className="cart__checkout">Proceed to Checkout</button>
-          </Link>
+          </Link> */}
+          <button className="cart_checkout" onClick={(e) => handleCheckout(e)}>
+            Proceed to Checkout
+          </button>
         </div>
       </div>
     </div>
