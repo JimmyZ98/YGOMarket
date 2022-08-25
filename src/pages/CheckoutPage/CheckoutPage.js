@@ -61,9 +61,7 @@ function CheckoutPage({
       });
       //stripe payment processing
       axios
-        .post(`${API_URL}/create-checkout-session`, {
-          id: 1,
-        })
+        .post(`${API_URL}/create-checkout-session`, cartItemIds)
         .then((res) => {
           window.location = res.data.url;
         });
