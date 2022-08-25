@@ -3,6 +3,8 @@
 YGOMarket is deployed using Heroku! https://ygomarket.herokuapp.com/home
 YGOMarket is an e-commerce website that allows users to buy and sell Yu-Gi-Oh cards from one another.
 
+Link to back-end repo: https://github.com/JimmyZ98/YGOMarket-backend
+
 ## Features
 
 - Product filtering
