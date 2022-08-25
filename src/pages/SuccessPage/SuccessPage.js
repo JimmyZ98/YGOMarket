@@ -11,11 +11,13 @@ function SuccessPage({
 }) {
   return (
     <div
-      className={darkMode ? "sell__login-notif darkmodeb" : "sell__login-notif"}
+      className={
+        darkMode ? "success__login-notif darkmodeb" : "success__login-notif"
+      }
     >
       Thank you! Your order has been confirmed.
       <span> </span>
-      <Link to="/home" className="sell__login-notif--text">
+      <Link to="/home" className="success__login-notif--text">
         Return to Shop
       </Link>
       <Cart

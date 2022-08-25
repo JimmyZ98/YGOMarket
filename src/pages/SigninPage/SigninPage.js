@@ -62,11 +62,25 @@ function SigninPage({
               placeholder="Password"
             />
           </div>
-          <button className="signin__button signin__signin">Sign In</button>
+          <button
+            className={
+              darkMode
+                ? "signin__button signin__signin darkmodesignbtn"
+                : "signin__button signin__signin"
+            }
+          >
+            Sign In
+          </button>
           <p className="signin__button-gap">OR</p>
         </form>
         <Link to="/register">
-          <button className="signin__button signin__create">
+          <button
+            className={
+              darkMode
+                ? "signin__button signin__create darkmodesignbtn"
+                : "signin__button signin__create"
+            }
+          >
             Create an Account
           </button>
         </Link>

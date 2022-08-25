@@ -72,7 +72,6 @@ function CheckoutPage({
     return cart.reduce((x, y) => x + y.price, 0);
   };
   const subtotal = getCartTotal(cartItems);
-  const history = useHistory();
 
   return (
     <ThemeProvider theme={theme}>
@@ -228,7 +227,14 @@ function CheckoutPage({
                   </p>
                 </div>
               </div>
-              <button className="checkout__form-button" type="submit">
+              <button
+                className={
+                  darkMode
+                    ? "checkout__form-button darkmodecheckout"
+                    : "checkout__form-button"
+                }
+                type="submit"
+              >
                 Proceed to Payment
               </button>
             </form>

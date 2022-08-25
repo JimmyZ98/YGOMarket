@@ -11,11 +11,13 @@ function CancelPage({
 }) {
   return (
     <div
-      className={darkMode ? "sell__login-notif darkmodeb" : "sell__login-notif"}
+      className={
+        darkMode ? "cancel__login-notif darkmodeb" : "cancel__login-notif"
+      }
     >
       Uh oh there was an issue. Transaction cancelled.
       <span> </span>
-      <Link to="/home" className="sell__login-notif--text">
+      <Link to="/home" className="cancel__login-notif--text">
         Return to Shop
       </Link>
       <Cart
