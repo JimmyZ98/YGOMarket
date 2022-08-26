@@ -1,6 +1,7 @@
 import React from "react";
 import Cart from "../../components/Cart/Cart";
 import { Link } from "react-router-dom";
+import "./SuccessPage.scss";
 
 function SuccessPage({
   cartItems,
